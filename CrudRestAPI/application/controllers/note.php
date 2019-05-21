@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 use Restserver\Libraries\REST_Controller;
 
-class Kontak extends REST_Controller {
+class Note extends REST_Controller {
 
     function __construct($config = 'rest') {
         parent::__construct($config);
@@ -29,7 +29,7 @@ class Kontak extends REST_Controller {
         $data = array(
                     'id'           => $this->post('id'),
                     'nama'          => $this->post('nama'),
-                    'nomor'    => $this->post('nomor'));
+                    'notes'    => $this->post('notes'));
         $insert = $this->db->insert('telepon', $data);
         if ($insert) {
             $this->response($data, 200);
@@ -44,7 +44,7 @@ class Kontak extends REST_Controller {
         $data = array(
                     'id'       => $this->put('id'),
                     'nama'          => $this->put('nama'),
-                    'nomor'    => $this->put('nomor'));
+                    'notes'    => $this->put('notes'));
         $this->db->where('id', $id);
         $update = $this->db->update('telepon', $data);
         if ($update) {

@@ -1,5 +1,5 @@
 <?php
-Class Kontak extends CI_Controller{
+Class Note extends CI_Controller{
 
     var $API ="";
 
@@ -12,20 +12,21 @@ Class Kontak extends CI_Controller{
         $this->load->helper('url');
     }
 
-    // menampilkan data kontak
+    // menampilkan data note
     function index(){
-        $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/kontak'));
-        $this->load->view('kontak/list',$data);
+        
+        $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/note'));
+        $this->load->view('note/list',$data);
     }
 
-    // insert data kontak
+    // insert data note
     function create(){
         if(isset($_POST['submit'])){
             $data = array(
                 'id'       =>  $this->input->post('id'),
                 'nama'      =>  $this->input->post('nama'),
-                'nomor'=>  $this->input->post('nomor'));
-            $insert =  $this->curl->simple_post($this->API.'/kontak', $data, array(CURLOPT_BUFFERSIZE => 10)); 
+                'notes'=>  $this->input->post('notes'));
+            $insert =  $this->curl->simple_post($this->API.'/note', $data, array(CURLOPT_BUFFERSIZE => 10)); 
             if($insert)
             {
                 $this->session->set_flashdata('hasil','Insert Data Berhasil');
@@ -33,20 +34,20 @@ Class Kontak extends CI_Controller{
             {
                $this->session->set_flashdata('hasil','Insert Data Gagal');
             }
-            redirect('kontak');
+            redirect('note');
         }else{
-            $this->load->view('kontak/create');
+            $this->load->view('note/create');
         }
     }
 
-    // edit data kontak
+    // edit data note
     function edit(){
         if(isset($_POST['submit'])){
             $data = array(
                 'id'       =>  $this->input->post('id'),
                 'nama'      =>  $this->input->post('nama'),
-                'nomor'=>  $this->input->post('nomor'));
-            $update =  $this->curl->simple_put($this->API.'/kontak', $data, array(CURLOPT_BUFFERSIZE => 10)); 
+                'notes'=>  $this->input->post('notes'));
+            $update =  $this->curl->simple_put($this->API.'/note', $data, array(CURLOPT_BUFFERSIZE => 10)); 
             if($update)
             {
                 $this->session->set_flashdata('hasil','Update Data Berhasil');
@@ -54,20 +55,20 @@ Class Kontak extends CI_Controller{
             {
                $this->session->set_flashdata('hasil','Update Data Gagal');
             }
-            redirect('kontak');
+            redirect('note');
         }else{
             $params = array('id'=>  $this->uri->segment(3));
-            $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/kontak',$params));
-            $this->load->view('kontak/edit',$data);
+            $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/note',$params));
+            $this->load->view('note/edit',$data);
         }
     }
 
-    // delete data kontak
+    // delete data note
     function delete($id){
         if(empty($id)){
-            redirect('kontak');
+            redirect('note');
         }else{
-            $delete =  $this->curl->simple_delete($this->API.'/kontak', array('id'=>$id), array(CURLOPT_BUFFERSIZE => 10)); 
+            $delete =  $this->curl->simple_delete($this->API.'/note', array('id'=>$id), array(CURLOPT_BUFFERSIZE => 10)); 
             if($delete)
             {
                 $this->session->set_flashdata('hasil','Delete Data Berhasil');
@@ -75,7 +76,7 @@ Class Kontak extends CI_Controller{
             {
                $this->session->set_flashdata('hasil','Delete Data Gagal');
             }
-            redirect('kontak');
+            redirect('note');
         }
     }
 }
