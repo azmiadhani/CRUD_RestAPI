@@ -1,3 +1,4 @@
+<center><br><br><br>
 <?php echo form_open('note/edit');?>
 <?php echo form_hidden('id',$datakontak[0]->id);?>
 
@@ -12,3 +13,4 @@
 <?php
 echo form_close();
 ?>
+</center>

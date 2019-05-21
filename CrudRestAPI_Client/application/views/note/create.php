@@ -1,3 +1,4 @@
+<center><br><br><br>
 <?php echo form_open_multipart('note/create');?>
 <table>
     <tr><td>TITLE</td><td><?php echo form_input('nama');?></td></tr>
@@ -9,3 +10,4 @@
 <?php
 echo form_close();
 ?>
+</center>
